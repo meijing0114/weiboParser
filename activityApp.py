@@ -18,10 +18,12 @@ def main():
     day = int(raw_input('How many days of weibo do you neeed? '))
     validDay = currentYear*12*30 + currentMonth*30 + currentDay - day
     outPath = raw_input('Input file name to save the results:')   
-    
+    proxy_ip = raw_input('Please input the proxy ip:')
+    proxy_port = raw_input('Please input the proxy port:')
+    proxy = proxy_ip + ':' + proxy_port
     # Create an weiboCNParser instance and start parsing
     print "Start parsing...\n"
-    weiboParser = weiboCNParser.weiboCNParser(username, pwd,validDay)
+    weiboParser = weiboCNParser.weiboCNParser(username, pwd,validDay,proxy)
     contentsDict = weiboParser.weiboCNContentParser(weiboIDs)
     #weiboParser.DBoperation()
     outPath = './'+outPath + '.xls'

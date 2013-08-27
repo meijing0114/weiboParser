@@ -9,10 +9,11 @@ from bs4 import BeautifulSoup#放在lib里面
 user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.29 Safari/525.13'
 headers = {'User-Agent':'Chrome/28.0.1468.0 Safari/537.36','Referer':'','Content-Type':'application/x-www-form-urlencoded'}
 class weiboCNParser(object):
-    def __init__(self, username, pwd ,validDate):
+    def __init__(self, username, pwd ,validDate,proxy):
         self.username = username
         self.pwd = pwd
         self.validDate = validDate
+        self.proxy = proxy
         # Add cookies:
         #获取一个保存cookie的对象
         cj = cookielib.LWPCookieJar()
@@ -102,7 +103,10 @@ class weiboCNParser(object):
             
     def getPageContent(self,pageUrl,contents):
         request = urllib2.Request(pageUrl)
-        request.set_proxy('192.168.8.87:3128','http')
+        try:
+            request.set_proxy(self.proxy,'http')
+        except Exception:
+            pass
         request.add_header('User-agent', user_agent)
         response = urllib2.urlopen(request)
         html = response.read()
