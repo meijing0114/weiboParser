@@ -13,6 +13,8 @@ weiboParser
 - 转发数
 - 评论数
 
+change sth
+
 程序结构如下：
 - activityApp.py : 程序入口 提示输入信息
 - weibo/weiboCNParser : 抓取weibo信息的类。
